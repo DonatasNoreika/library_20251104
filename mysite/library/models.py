@@ -4,12 +4,20 @@ import uuid
 class Genre(models.Model):
     name = models.CharField(verbose_name="Name")
 
+    class Meta:
+        verbose_name = "Žanras"
+        verbose_name_plural = "Žanrai"
+
     def __str__(self):
         return self.name
 
 class Author(models.Model):
     first_name = models.CharField(verbose_name="First Name")
     last_name = models.CharField(verbose_name="Last Name")
+
+    class Meta:
+        verbose_name = "Autorius"
+        verbose_name_plural = "Autoriai"
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -24,6 +32,10 @@ class Book(models.Model):
                                on_delete=models.SET_NULL,
                                null=True, blank=True)
     genre = models.ManyToManyField(to="Genre", verbose_name="Genre")
+
+    class Meta:
+        verbose_name = "Knyga"
+        verbose_name_plural = "Knygos"
 
     def __str__(self):
         return self.title
@@ -47,6 +59,10 @@ class BookInstance(models.Model):
                               max_length=1,
                               choices=LOAN_STATUS,
                               default='a')
+
+    class Meta:
+        verbose_name = "Egzempliorius"
+        verbose_name_plural = "Egzemplioriai"
 
     def __str__(self):
         return str(self.uuid)
