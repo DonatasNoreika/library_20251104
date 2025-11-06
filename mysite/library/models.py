@@ -2,7 +2,7 @@ from django.db import models
 import uuid
 
 class Genre(models.Model):
-    name = models.CharField(verbose_name="Name")
+    name = models.CharField(verbose_name="Pavadinimas")
 
     class Meta:
         verbose_name = "Žanras"
@@ -12,8 +12,8 @@ class Genre(models.Model):
         return self.name
 
 class Author(models.Model):
-    first_name = models.CharField(verbose_name="First Name")
-    last_name = models.CharField(verbose_name="Last Name")
+    first_name = models.CharField(verbose_name="Vardas")
+    last_name = models.CharField(verbose_name="Pavardė")
 
     class Meta:
         verbose_name = "Autorius"
@@ -24,14 +24,24 @@ class Author(models.Model):
 
 
 class Book(models.Model):
-    title = models.CharField(verbose_name="Title")
-    summary = models.TextField(verbose_name="Summary")
+    title = models.CharField(verbose_name="Pavadinimas")
+    summary = models.TextField(verbose_name="Aprašymas")
     isbn = models.CharField(verbose_name="ISBN", max_length=13)
     author = models.ForeignKey(to="Author",
-                               verbose_name="Author",
+                               verbose_name="Autorius",
                                on_delete=models.SET_NULL,
                                null=True, blank=True)
-    genre = models.ManyToManyField(to="Genre", verbose_name="Genre")
+    genre = models.ManyToManyField(to="Genre", verbose_name="Žanras (-ai)")
+
+    def display_genre(self):
+        genres = self.genre.all()
+        result = ""
+        for genre in genres:
+            result += genre.name + ", "
+        return result
+
+    display_genre.short_description = "Žanrai"
+
 
     class Meta:
         verbose_name = "Knyga"
@@ -43,9 +53,9 @@ class Book(models.Model):
 
 class BookInstance(models.Model):
     uuid = models.UUIDField(verbose_name="UUID", default=uuid.uuid4)
-    due_back = models.DateField(verbose_name="Available", null=True, blank=True)
+    due_back = models.DateField(verbose_name="Bus prieinama", null=True, blank=True)
     book = models.ForeignKey(to="Book",
-                             verbose_name="Book",
+                             verbose_name="Knyga",
                              on_delete=models.SET_NULL,
                              null=True, blank=True)
 
@@ -55,7 +65,7 @@ class BookInstance(models.Model):
         ('a', 'Available'),
         ('r', 'Reserved'),
     )
-    status = models.CharField(verbose_name="Status",
+    status = models.CharField(verbose_name="Būsena",
                               max_length=1,
                               choices=LOAN_STATUS,
                               default='a')
