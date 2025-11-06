@@ -15,6 +15,11 @@ class Author(models.Model):
     first_name = models.CharField(verbose_name="Vardas")
     last_name = models.CharField(verbose_name="Pavardė")
 
+    def display_books(self):
+        return list(book.title for book in self.books.all())
+
+    display_books.short_description = "Knygos"
+
     class Meta:
         verbose_name = "Autorius"
         verbose_name_plural = "Autoriai"
@@ -30,7 +35,8 @@ class Book(models.Model):
     author = models.ForeignKey(to="Author",
                                verbose_name="Autorius",
                                on_delete=models.SET_NULL,
-                               null=True, blank=True)
+                               null=True, blank=True,
+                               related_name="books")
     genre = models.ManyToManyField(to="Genre", verbose_name="Žanras (-ai)")
 
     def display_genre(self):
