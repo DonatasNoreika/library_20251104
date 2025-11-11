@@ -4,7 +4,7 @@
 {% block "title" %}Autoriai{% endblock %}
 
 {% block "content" %}
-
+<h1 class="display-6">Mūsų autoriai:</h1>
 {% for author in authors %}
 <a href="{% url 'author' author.pk %}"><p>{{ author }}</p></a>
 {% endfor %}
