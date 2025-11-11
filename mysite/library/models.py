@@ -14,6 +14,7 @@ class Genre(models.Model):
 class Author(models.Model):
     first_name = models.CharField(verbose_name="Vardas")
     last_name = models.CharField(verbose_name="Pavardė")
+    description = models.TextField(verbose_name="Aprašymas", default="")
 
     def display_books(self):
         return list(book.title for book in self.books.all())

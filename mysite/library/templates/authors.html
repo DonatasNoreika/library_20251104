@@ -6,7 +6,7 @@
 {% block "content" %}
 
 {% for author in authors %}
-<p>{{ author }}</p>
+<a href="{% url 'author' author.pk %}"><p>{{ author }}</p></a>
 {% endfor %}
 
 {% endblock %}
