@@ -6,6 +6,6 @@
 {% block "content" %}
 <h1 class="display-6">Mūsų knygos:</h1>
 {% for book in books %}
-<p>{{ book.title }}</p>
+<a href="{{ book.pk }}"><p>{{ book.title }}</p></a>
 {% endfor %}
 {% endblock %}
