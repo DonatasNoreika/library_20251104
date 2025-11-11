@@ -10,4 +10,14 @@
 <p><b>ISBN: </b>{{ book.isbn }}</p>
 <p><b>Žanras (-ai): </b>{{ book.display_genre }}</p>
 <p>{{ book.summary }}</p>
+<hr>
+<h4>Knygos egzemplioriai:</h4>
+{% for instance in book.instances.all %}
+<p class="{% if instance.status == 't' %}text-danger{% elif instance.status == 'r' %}text-warning{% elif instance.status == 'a' %}text-success{% endif %}">{{ instance.get_status_display }}</p>
+<p><b>Bus grąžinta: </b>{{ instance.due_back }}</p>
+<small><b>ID: </b>{{ instance.uuid }}</small>
+<hr>
+{% empty %}
+<p>Šios knygos egzempliorių neturime</p>
+{% endfor %}
 {% endblock %}

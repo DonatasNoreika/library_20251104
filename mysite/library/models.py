@@ -64,7 +64,8 @@ class BookInstance(models.Model):
     book = models.ForeignKey(to="Book",
                              verbose_name="Knyga",
                              on_delete=models.SET_NULL,
-                             null=True, blank=True)
+                             null=True, blank=True,
+                             related_name="instances")
 
     LOAN_STATUS = (
         ('d', 'Administered'),
