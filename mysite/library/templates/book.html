@@ -4,6 +4,9 @@
 {% block "title" %}Knyga{% endblock %}
 
 {% block "content" %}
+{% if book.cover %}
+<img src="{{ book.cover.url }}" style="max-width: 300px">
+{% endif %}
 <h1 class="display-6">Knyga:</h1>
 <p><b>Pavadinimas: </b>{{ book.title }}</p>
 <p><b>Autorius: </b>{{ book.author }}</p>

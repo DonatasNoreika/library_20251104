@@ -39,6 +39,7 @@ class Book(models.Model):
                                null=True, blank=True,
                                related_name="books")
     genre = models.ManyToManyField(to="Genre", verbose_name="Žanras (-ai)")
+    cover = models.ImageField(verbose_name="Viršelis", upload_to="covers", null=True, blank=True)
 
     def display_genre(self):
         genres = self.genre.all()
