@@ -4,10 +4,27 @@
 {% block "title" %}Knygos{% endblock %}
 
 {% block "content" %}
-<h1 class="display-6">Mūsų knygos:</h1>
-{% for book in books %}
-<a href="{{ book.pk }}"><p>{{ book.title }}</p></a>
-{% endfor %}
+{% load static %}
+<div class="container my-3">
+    <div class="row">
+        <h1 class="display-6">Mūsų knygos:</h1>
+        {% for book in books %}
+        <div class="card col-md-4 d-flex align-items-stretch me-4" style="width: 30%">
+            {% if book.cover %}
+            <img class="card-img-top" src="{{ book.cover.url }}" alt="..." style="width:100%">
+            {% else %}
+            <img class="card-img-top" src="{% static 'img/no-image.png' %}">
+            {% endif %}
+            <div class="card-body">
+                <h4 class="card-title">{{ book.title }}</h4>
+                <p class="card-text">{{ book.author }}</p>
+                <a href="{{ book.pk }}" class="btn btn-primary">See Profile</a>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+</div>
 
 {% if is_paginated %}
 <ul class="pagination justify-content-center">
