@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 class Genre(models.Model):
     name = models.CharField(verbose_name="Pavadinimas")
@@ -85,6 +86,9 @@ class BookInstance(models.Model):
                                on_delete=models.SET_NULL,
                                null=True,
                                blank=True)
+
+    def is_overdue(self):
+        return self.due_back and timezone.now().date() > self.due_back
 
     class Meta:
         verbose_name = "Egzempliorius"

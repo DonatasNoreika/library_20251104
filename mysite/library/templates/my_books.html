@@ -5,6 +5,11 @@
 
 {% block "content" %}
 {% for instance in instances %}
-<p>{{ instance.book }} ({{ instance.uuid }})</p>
+<p>{{ instance.book }} ({{ instance.uuid }})
+    <br>
+    <span class="{% if instance.is_overdue %}text-danger{% endif %}">
+        {{ instance.due_back }} - {{ instance.get_status_display }}
+    </span>
+</p>
 {% endfor %}
 {% endblock %}
