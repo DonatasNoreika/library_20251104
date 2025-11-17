@@ -2,6 +2,7 @@ from django.db import models
 import uuid
 from django.contrib.auth.models import User
 from django.utils import timezone
+from tinymce.models import HTMLField
 
 class Genre(models.Model):
     name = models.CharField(verbose_name="Pavadinimas")
@@ -16,7 +17,7 @@ class Genre(models.Model):
 class Author(models.Model):
     first_name = models.CharField(verbose_name="Vardas")
     last_name = models.CharField(verbose_name="Pavardė")
-    description = models.TextField(verbose_name="Aprašymas", default="")
+    description = HTMLField(verbose_name="Aprašymas", default="")
 
     def display_books(self):
         return list(book.title for book in self.books.all())
