@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+from django.contrib.auth.models import User
 
 class Genre(models.Model):
     name = models.CharField(verbose_name="Pavadinimas")
@@ -78,6 +79,12 @@ class BookInstance(models.Model):
                               max_length=1,
                               choices=LOAN_STATUS,
                               default='a')
+
+    reader = models.ForeignKey(to=User,
+                               verbose_name="Skaitytojas",
+                               on_delete=models.SET_NULL,
+                               null=True,
+                               blank=True)
 
     class Meta:
         verbose_name = "Egzempliorius"
