@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Genre, Author, Book, BookInstance
+from .models import Genre, Author, Book, BookInstance, BookReview
 
 
 class AuthorAdmin(admin.ModelAdmin):
@@ -13,9 +13,14 @@ class BookInstanceInLine(admin.TabularInline):
     readonly_fields = ['uuid']
     fields = ['uuid', 'due_back', 'status']
 
+
+class BookReviewInLine(admin.TabularInline):
+    model = BookReview
+    extra = 0
+
 class BookAdmin(admin.ModelAdmin):
     list_display = ['title', 'isbn', 'author', 'display_genre']
-    inlines = [BookInstanceInLine]
+    inlines = [BookReviewInLine, BookInstanceInLine]
 
 
 class BookInstanceAdmin(admin.ModelAdmin):
