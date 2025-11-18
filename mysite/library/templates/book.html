@@ -13,7 +13,17 @@
 <p><b>ISBN: </b>{{ book.isbn }}</p>
 <p><b>Žanras (-ai): </b>{{ book.display_genre }}</p>
 <p>{{ book.summary }}</p>
+
 <hr>
+<h4>Komentarai:</h4>
+{% for review in book.reviews.all %}
+<p><b>{{ review.reviewer }}</b>, <em>{{ review.date_created }}</em></p>
+<p>{{ review.content }}</p>
+<hr>
+{% empty %}
+<p>Nėra komentarų</p>
+{% endfor %}
+
 <h4>Knygos egzemplioriai:</h4>
 {% for instance in book.instances.all %}
 <p class="{% if instance.status == 't' %}text-danger{% elif instance.status == 'r' %}text-warning{% elif instance.status == 'a' %}text-success{% endif %}">{{ instance.get_status_display }}</p>
@@ -23,4 +33,5 @@
 {% empty %}
 <p>Šios knygos egzempliorių neturime</p>
 {% endfor %}
+
 {% endblock %}
