@@ -7,7 +7,8 @@
 <h2 class="mb-4 text-center">Registracija</h2>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Registruotis</button>
+    {% load crispy_forms_tags %}
+    {{ form | crispy }}
+    <button type="submit" class="btn btn-secondary">Registruotis</button>
 </form>
 {% endblock %}
