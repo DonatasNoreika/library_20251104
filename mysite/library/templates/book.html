@@ -16,6 +16,17 @@
 
 <hr>
 <h4>Komentarai:</h4>
+
+{% if user.is_authenticated %}
+<h2>Palikite atsiliepimą</h2>
+<form method="post" class="mb-2">
+    {% csrf_token %}
+    {% load crispy_forms_tags %}
+    {{ form | crispy }}
+    <button type="submit" class="btn btn-secondary">Paskelbti</button>
+</form>
+{% endif %}
+
 {% for review in book.reviews.all %}
 <p><b>{{ review.reviewer }}</b>, <em>{{ review.date_created }}</em></p>
 <p>{{ review.content }}</p>

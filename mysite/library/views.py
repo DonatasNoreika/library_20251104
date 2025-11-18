@@ -1,11 +1,13 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from django.urls import reverse_lazy
+from django.views.generic.edit import FormMixin
 from .models import Book, BookInstance, Author
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
+from .forms import BookReviewForm
 
 def index(request):
     num_books = Book.objects.count()
@@ -49,10 +51,30 @@ class BookListView(generic.ListView):
     paginate_by = 3
 
 
-class BookDetailView(generic.DetailView):
+class BookDetailView(FormMixin, generic.DetailView):
     model = Book
     template_name = "book.html"
     context_object_name = "book"
+    form_class = BookReviewForm
+    # success_url = reverse_lazy('books')
+
+    def get_success_url(self):
+        return reverse("book", kwargs={"pk": self.object.pk})
+
+    # standartinis post metodo perrašymas, naudojant FormMixin, galite kopijuoti tiesiai į savo projektą.
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form.instance.reviewer = self.request.user
+        form.instance.book = self.get_object()
+        form.save()
+        return super().form_valid(form)
 
 
 def search(request):
