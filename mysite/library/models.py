@@ -4,6 +4,14 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from tinymce.models import HTMLField
 
+
+class Profile(models.Model):
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    photo = models.ImageField(verbose_name="Nuotrauka", upload_to="profile_pics", null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.user.username} profilis"
+
 class Genre(models.Model):
     name = models.CharField(verbose_name="Pavadinimas")
 
