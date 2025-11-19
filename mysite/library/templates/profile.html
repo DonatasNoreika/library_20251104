@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+
+{% block "title" %}Profilis{% endblock %}
+
+
+{% block "content" %}
+
+<p>Vartotojas: {{ user.username }}</p>
+<p>Vardas: {{ user.first_name }}</p>
+<p>Pavardė: {{ user.last_name }}</p>
+<p>El. paštas: {{ user.email }}</p>
+
+<hr>
+<form method="post">
+    {% csrf_token %}
+    {% load crispy_forms_tags %}
+    {{ form | crispy }}
+    <button class="btn btn-secondary" type="submit">Saugoti</button>
+</form>
+{% endblock %}
