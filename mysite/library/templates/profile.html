@@ -6,7 +6,7 @@
 
 {% block "content" %}
 {% if user.profile.photo %}
-<img src="{{ user.profile.photo.url }}">
+<img src="{{ user.profile.photo.url }}" class="rounded-circle">
 {% endif %}
 <p>Vartotojas: {{ user.username }}</p>
 <p>Vardas: {{ user.first_name }}</p>
