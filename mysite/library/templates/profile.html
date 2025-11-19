@@ -14,10 +14,11 @@
 <p>El. paštas: {{ user.email }}</p>
 
 <hr>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% load crispy_forms_tags %}
-    {{ form | crispy }}
+    {{ u_form | crispy }}
+    {{ p_form | crispy }}
     <button class="btn btn-secondary" type="submit">Saugoti</button>
 </form>
 {% endblock %}

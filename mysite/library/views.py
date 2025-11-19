@@ -1,13 +1,14 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormMixin
 from .models import Book, BookInstance, Author
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
-from .forms import BookReviewForm, UserChangeForm
+from .forms import BookReviewForm, UserChangeForm, ProfileChangeForm
 
 def index(request):
     num_books = Book.objects.count()
@@ -110,11 +111,25 @@ class SignUp(generic.CreateView):
     success_url = reverse_lazy("login")
 
 
-class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
-    form_class = UserChangeForm
-    template_name = "profile.html"
-    success_url = reverse_lazy('profile')
+# class ProfileUpdateView(LoginRequiredMixin, generic.UpdateView):
+#     form_class = UserChangeForm
+#     template_name = "profile.html"
+#     success_url = reverse_lazy('profile')
+#
+#     def get_object(self, queryset=...):
+#         return self.request.user
 
-    def get_object(self, queryset=...):
-        return self.request.user
+@login_required
+def profile(request):
+    u_form = UserChangeForm(request.POST or None, instance=request.user)
+    p_form = ProfileChangeForm(request.POST or None, request.FILES, instance=request.user.profile)
+    if u_form.is_valid() and p_form.is_valid():
+        u_form.save()
+        p_form.save()
+        return redirect("profile")
 
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+    return render(request, template_name="profile.html", context=context)
