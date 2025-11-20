@@ -10,5 +10,6 @@
 <p>Bus prieinama: {{ instance.due_back }}</p>
 <div>
     <a class="btn btn-warning" href="{% url 'instances_update' instance.pk %}">Redaguoti</a>
+    <a class="btn btn-danger" href="{% url 'instances_delete' instance.pk %}">Ištrinti</a>
 </div>
 {% endblock %}
