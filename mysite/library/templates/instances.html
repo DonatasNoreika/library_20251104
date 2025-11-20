@@ -3,6 +3,9 @@
 {% block "title" %}Administravimas{% endblock %}
 
 {% block "content" %}
+<div class="mb-2">
+    <a class="btn btn-primary" href="{% url 'instances_new' %}">Naujas egzempliorius</a>
+</div>
 {% for instance in instances %}
 <p><a href="{{ instance.pk }}">{{ instance }}</a></p>
 {% endfor %}

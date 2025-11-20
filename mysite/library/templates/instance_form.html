@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+
+{% block "title" %}Egzemplioriaus kūrimas{% endblock %}
+
+{% block "content" %}
+<h2 class="mb-4 text-center">Egzemplioriaus kūrimas</h2>
+<form method="post">
+    {% csrf_token %}
+    {% load crispy_forms_tags %}
+    {{ form | crispy }}
+    <button type="submit" class="btn btn-secondary">Sukurti</button>
+</form>
+{% endblock %}
