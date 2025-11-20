@@ -4,6 +4,6 @@
 
 {% block "content" %}
 {% for instance in instances %}
-<p>{{ instance }}</p>
+<p><a href="{{ instance.pk }}">{{ instance }}</a></p>
 {% endfor %}
 {% endblock %}
