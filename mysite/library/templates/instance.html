@@ -8,4 +8,7 @@
 <p>Būsena: {{ instance.get_status_display }}</p>
 <p>Skaitytojas: {{ instance.reader }}</p>
 <p>Bus prieinama: {{ instance.due_back }}</p>
+<div>
+    <a class="btn btn-warning" href="{% url 'instances_update' instance.pk %}">Redaguoti</a>
+</div>
 {% endblock %}
