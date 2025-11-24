@@ -70,6 +70,24 @@
                     <a class="nav-link" href="{% url 'login' %}">Prisijungti</a>
                 </li>
                 {% endif %}
+                <li class="nav-item">
+                    {% load i18n %}
+                    <form action="{% url 'set_language' %}" method="post" class="d-flex">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}"/>
+                        <select name="language" class="form-control me-2" onchange="this.form.submit()">
+                            {% load static %}
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% for lang in LANGUAGES %}
+                            <option value="{{ lang.0 }}"
+                                    {% if lang.0 == LANGUAGE_CODE %}selected="selected" {% endif %}>
+                                {{ lang.1 }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </li>
             </ul>
             <form class="d-flex" action="{% url 'search' %}">
                 <input class="form-control me-2" type="text" name="query" placeholder="Ieškoti">
