@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-24 19:31+0200\n"
-"PO-Revision-Date: 2025-11-24 19:39+0200\n"
+"POT-Creation-Date: 2025-11-24 19:50+0200\n"
+"PO-Revision-Date: 2025-11-24 19:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -52,7 +52,7 @@ msgstr "Pavardė"
 msgid "Description"
 msgstr "Aprašymas"
 
-#: .\models.py:48 .\models.py:82
+#: .\models.py:48 .\models.py:82 .\templates\base.html:40
 msgid "Books"
 msgstr "Knygos"
 
@@ -60,7 +60,7 @@ msgstr "Knygos"
 msgid "Author"
 msgstr "Autorius"
 
-#: .\models.py:52
+#: .\models.py:52 .\templates\base.html:37
 msgid "Authors"
 msgstr "Autoriai"
 
@@ -131,3 +131,63 @@ msgstr "Knygos komentaras"
 #: .\models.py:137
 msgid "Book Reviews"
 msgstr "Knygos komentarai"
+
+#: .\templates\base.html:21
+msgid "Local Library"
+msgstr "Rajono biblioteka"
+
+#: .\templates\base.html:23
+msgid "This is Django Demo Project!"
+msgstr "Tai yra Django demo projektas!"
+
+#: .\templates\base.html:34 .\templates\index.html:3
+msgid "HOME"
+msgstr "PRADŽIA"
+
+#: .\templates\base.html:53
+msgid "My Books"
+msgstr "Mano Knygos"
+
+#: .\templates\base.html:57
+msgid "Administration"
+msgstr "Administravimas"
+
+#: .\templates\base.html:63
+msgid "Logout"
+msgstr "Atsijungti"
+
+#: .\templates\base.html:68
+msgid "Signup"
+msgstr "Registracija"
+
+#: .\templates\base.html:71
+msgid "Login"
+msgstr "Prisijungti"
+
+#: .\templates\base.html:93
+msgid "Search"
+msgstr "Ieškoti"
+
+#: .\templates\index.html:6
+msgid "Today we have:"
+msgstr "Šiandien turime:"
+
+#: .\templates\index.html:8
+msgid "Books:"
+msgstr "Knygos:"
+
+#: .\templates\index.html:9
+msgid "Book Instances:"
+msgstr "Knygų egzemplioriai:"
+
+#: .\templates\index.html:10
+msgid "Books Available:"
+msgstr "Prieinamos knygos:"
+
+#: .\templates\index.html:11
+msgid "Authors:"
+msgstr "Autoriai:"
+
+#: .\templates\index.html:13
+msgid "Your visits:"
+msgstr "Apsilankymų skaičius:"
